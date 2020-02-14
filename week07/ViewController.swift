@@ -14,12 +14,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var showArray: UITableView!
     @IBOutlet weak var savedText: UITextView!
 
+    @IBOutlet weak var showTime: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         showArray.dataSource = self
         showArray.delegate = self
         showArray.backgroundColor = UIColor.white
+        showTime.text = currentTime()
 
         
     }
@@ -28,7 +30,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var someStrings = [String]()
     var currentIndex = -1
 
+    func currentTime() -> String {
+        let date = Date()
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: date)
+        let minutes = calendar.component(.minute, from: date)
+        return "\(hour):\(minutes)"
+    }
 
+        
+    
    //delete function, swipe on the item to delete
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
       if editingStyle == .delete {
